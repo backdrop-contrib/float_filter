@@ -1,0 +1,42 @@
+<?php
+// $Id$
+
+/**
+ * Implementation of hook_filter().
+ */
+function float_filter_filter($op, $delta = 0, $format = -1, $text = '') {
+  if ($op == 'list') {
+    return array(0 => t('Float filter'));
+  }
+  switch ($delta) {
+  case 0:
+
+    switch ($op) {
+    case 'description':
+      return t('Wrap floated images into spans.');
+
+    case 'prepare':
+      return $text;
+
+    case 'process':
+      return _floatfilter($text);
+
+    case 'settings':
+      return $form;
+    }
+    break;
+  }
+}
+
+/**
+ * Scan code and adds span to floated img
+ *
+ * @param $string
+ *  Text, maybe containing floated images.
+ * @return
+ *  The input text with added spans.
+ */
+function _floatfilter($string) {
+  $string = preg_replace("/<img(.*)float:.(right|left)(.*)>/", "<span class=\"float$2\"><img$1float: $2$3></span>", $string);
+  return $string;
+}
