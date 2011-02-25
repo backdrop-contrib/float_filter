@@ -1,4 +1,3 @@
-; $Id$
 name = Float Filter
 description = "The Float filter wraps a span around floated images."
 package = "Input filters"
