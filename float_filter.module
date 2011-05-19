@@ -12,7 +12,7 @@ function float_filter_filter($op, $delta = 0, $format = -1, $text = '') {
 
     switch ($op) {
     case 'description':
-      return t('Wrap floated images into spans.');
+      return t('Wrap floated images and tables into <span> or <div> tags.');
 
     case 'prepare':
       return $text;
@@ -36,6 +36,7 @@ function float_filter_filter($op, $delta = 0, $format = -1, $text = '') {
  *  The input text with added spans.
  */
 function _floatfilter($string) {
-  $string = preg_replace("/<img(.*)float:.(right|left)(.*)>/", "<span class=\"float$2\"><img$1float: $2$3></span>", $string);
+  $string = preg_replace("/<img(.*)(float|align):.(right|left)(.*)>/", "<span class=\"float$3\"><img$1$2: $3$4></span>", $string);
+  $string = preg_replace("/<table(.*)(float|align):.(right|left)(.*)>/", "<div class=\"float$3\"><table$1$2: $3$4></span>", $string);
   return $string;
 }

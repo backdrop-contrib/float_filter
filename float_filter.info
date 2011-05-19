@@ -1,5 +1,5 @@
 name = Float Filter
-description = "The Float filter wraps a span around floated images."
+description = "The Float filter wraps a span or div tag around floated images and tables."
 package = "Input filters"
 dependencies[] = filter
 core = 6.x
