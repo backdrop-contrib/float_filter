@@ -6,7 +6,7 @@
 function float_filter_filter_info() {
   $filters['float_filter'] = array(
     'title'             => t('Float filter'),
-    'description'       => t('Wrap floated images and tables into <span> or <div> tags.'),
+    'description'       => t('Wrap floated images and tables into &lt;span&gt; or &lt;div&gt; tags.'),
     'process callback'  => '_float_filter_process',
     'default settings'  => array(
       'img_tag'   => 'span',
@@ -53,13 +53,18 @@ function _float_filter_settings($form, $form_state, $filter, $format, $defaults)
  *  The input text with added markup.
  */
 function _float_filter_process($text, $filter, $format) {
-  if ($filter->settings['img_tag']) {
-    $text = preg_replace("/<img(.*)float:(.*)(right|left)(.*)\/>/U", "<" . $filter->settings['img_tag'] . " class=\"float$3\"><img$1float:$3$4 /></" . $filter->settings['img_tag'] . ">", $text);
-    $text = preg_replace("/<img(.*)align=\"(right|left)\"(.*)\/>/U", "<" . $filter->settings['img_tag'] . " class=\"float$2\"><img$1align=\"$2\"$3 /></" . $filter->settings['img_tag'] . ">", $text);
+
+  $imgtag = $filter->settings['img_tag'];
+  if ($imgtag) {
+    $text = preg_replace("/<img(.*)float:(.*)(right|left)(.*)\/>/U", "<" . $imgtag . " class=\"float$3\"><img$1float:$3$4 /></" . $imgtag . ">", $text);
+    $text = preg_replace("/<img(.*)align=\"(right|left)\"(.*)\/>/U", "<" . $imgtag . " class=\"float$2\"><img$1align=\"$2\"$3 /></" . $imgtag . ">", $text);
   }
-  if ($filter->settings['table_tag']) {
-    $text = preg_replace("/<table(.*)float:(.*)(right|left)(.*)>(.*)<\/table>/msU", "<" . $filter->settings['table_tag'] . " class=\"float$3\"><table$1float:$3$4>$5</table></" . $filter->settings['table_tag'] . ">", $text);
-    $text = preg_replace("/<table(.*)align=\"(right|left)\"(.*)>(.*)<\/table>/msU", "<" . $filter->settings['table_tag'] . " class=\"float$2\"><table$1align=\"$2\"$3>$4</table></" . $filter->settings['table_tag'] . ">", $text);
+
+  $tabletag = $filter->settings['table_tag'];
+  if ($tabletag) {
+    $text = preg_replace("/<table(.*)float:(.*)(right|left)(.*)>(.*)<\/table>/msU", "<" . $tabletag . " class=\"float$3\"><table$1float:$3$4>$5</table></" . $tabletag . ">", $text);
+    $text = preg_replace("/<table(.*)align=\"(right|left)\"(.*)>(.*)<\/table>/msU", "<" . $tabletag . " class=\"float$2\"><table$1align=\"$2\"$3>$4</table></" . $tabletag . ">", $text);
   }
+
   return $text;
 }
