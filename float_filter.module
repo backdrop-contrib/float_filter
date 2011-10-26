@@ -56,14 +56,14 @@ function _float_filter_process($text, $filter, $format) {
 
   $imgtag = $filter->settings['img_tag'];
   if ($imgtag) {
-    $text = preg_replace("/<img(.*)float:(.*)(right|left)(.*)\/>/U", "<" . $imgtag . " class=\"float$3\"><img$1float:$3$4 /></" . $imgtag . ">", $text);
-    $text = preg_replace("/<img(.*)align=\"(right|left)\"(.*)\/>/U", "<" . $imgtag . " class=\"float$2\"><img$1align=\"$2\"$3 /></" . $imgtag . ">", $text);
+    $text = preg_replace("/<img([^>]*)float:([^>]*)(right|left)([^>]*)\/>/U", "<" . $imgtag . " class=\"float$3\"><img$1float:$3$4 /></" . $imgtag . ">", $text);
+    $text = preg_replace("/<img([^>]*)align=\"(right|left)\"([^>]*)\/>/U", "<" . $imgtag . " class=\"float$2\"><img$1align=\"$2\"$3 /></" . $imgtag . ">", $text);
   }
 
   $tabletag = $filter->settings['table_tag'];
   if ($tabletag) {
-    $text = preg_replace("/<table(.*)float:(.*)(right|left)(.*)>(.*)<\/table>/msU", "<" . $tabletag . " class=\"float$3\"><table$1float:$3$4>$5</table></" . $tabletag . ">", $text);
-    $text = preg_replace("/<table(.*)align=\"(right|left)\"(.*)>(.*)<\/table>/msU", "<" . $tabletag . " class=\"float$2\"><table$1align=\"$2\"$3>$4</table></" . $tabletag . ">", $text);
+    $text = preg_replace("/<table([^>]*)float:([^>]*)(right|left)([^>]*)>(.*)<\/table>/msU", "<" . $tabletag . " class=\"float$3\"><table$1float:$3$4>$5</table></" . $tabletag . ">", $text);
+    $text = preg_replace("/<table([^>]*)align=\"(right|left)\"([^>]*)>(.*)<\/table>/msU", "<" . $tabletag . " class=\"float$2\"><table$1align=\"$2\"$3>$4</table></" . $tabletag . ">", $text);
   }
 
   return $text;
