@@ -21,7 +21,7 @@ function float_filter_filter_info() {
 /**
  * Settings callback for Float filter
  */
-function _float_filter_settings($form, $form_state, $filter, $format, $defaults) {
+function _float_filter_settings($form, $form_state, $filter, $format) {
   $settings['img_tag'] = array(
     '#type'           => 'select',
     '#title'          => t('Wrapper tag for images'),
@@ -30,7 +30,7 @@ function _float_filter_settings($form, $form_state, $filter, $format, $defaults)
       'div'   => 'div',
       'span'  => 'span',
     ),
-    '#default_value'  => isset($filter->settings['img_tag']) ? $filter->settings['img_tag'] : $defaults['img_tag'],
+    '#default_value'  => $filter->settings['img_tag'],
   );
   $settings['table_tag'] = array(
     '#type'           => 'select',
@@ -40,7 +40,7 @@ function _float_filter_settings($form, $form_state, $filter, $format, $defaults)
       'div'   => 'div',
       'span'  => 'span',
     ),
-    '#default_value'  => isset($filter->settings['table_tag']) ? $filter->settings['table_tag'] : $defaults['table_tag'],
+    '#default_value'  => $filter->settings['table_tag'],
   );
   $settings['figure_tag'] = array(
     '#type'           => 'select',
@@ -50,7 +50,7 @@ function _float_filter_settings($form, $form_state, $filter, $format, $defaults)
       'div'   => 'div',
       'span'  => 'span',
     ),
-    '#default_value'  => isset($filter->settings['figure_tag']) ? $filter->settings['figure_tag'] : $defaults['figure_tag'],
+    '#default_value'  => $filter->settings['figure_tag'],
   );
   return $settings;
 }
